@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -11,19 +12,30 @@ public class PlayerController : MonoBehaviour
 
     [Header("Move")]
     public float moveSpeed;
+    public LayerMask groundLayerMask;
     private Vector2 currentMoveInput;
 
+
     [Header("Look")]
-    private float camCurrentXRot;
     public float minXLook;
+    private float camCurrentXRot;
     public float maxXLook;
     public float lookSensitively;
     private Vector2 mouseDelta;
     public Transform cameraContainer;
 
+
+    [Header("Jump")]
+    public int jumpPower;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void FixedUpdate()
@@ -52,6 +64,27 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitively, 0);
     }
 
+    private bool isGrounded()
+    {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -68,4 +101,13 @@ public class PlayerController : MonoBehaviour
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && isGrounded())
+        {
+            rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+        }
+    }
+
 }
