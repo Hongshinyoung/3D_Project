@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/hong/문서/UnityProject/3D_Project/3D_Project/Assembly-CSharp.csproj",
+      "projectUniqueName": "/home/hong/문서/UnityProjects/3D_Project/3D_Project/Assembly-CSharp.csproj",
       "projectName": "Assembly-CSharp",
-      "projectPath": "/home/hong/문서/UnityProject/3D_Project/3D_Project/Assembly-CSharp.csproj",
+      "projectPath": "/home/hong/문서/UnityProjects/3D_Project/3D_Project/Assembly-CSharp.csproj",
       "packagesPath": "/home/hong/.nuget/packages/",
-      "outputPath": "/home/hong/문서/UnityProject/3D_Project/3D_Project/Temp/obj/Debug/Assembly-CSharp/",
+      "outputPath": "/home/hong/문서/UnityProjects/3D_Project/3D_Project/Temp/obj/Debug/Assembly-CSharp/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/hong/.nuget/NuGet/NuGet.Config"
