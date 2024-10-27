@@ -354,10 +354,15 @@
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"/home/hong/Unity/Hub/Editor/2022.3.17f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/home/hong/Unity/Hub/Editor/2022.3.17f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Scripts/JumpingObject.cs"
 "Assets/Scripts/Player/CharacterManager.cs"
 "Assets/Scripts/Player/Player.cs"
+"Assets/Scripts/Player/PlayerCondition.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/ScriptableObject/Scripts/ItemData.cs"
 "Assets/Scripts/Sound/MusicZone.cs"
+"Assets/Scripts/UI/Condition.cs"
+"Assets/Scripts/UI/UICondition.cs"
 -langversion:9.0
 
 /deterministic
