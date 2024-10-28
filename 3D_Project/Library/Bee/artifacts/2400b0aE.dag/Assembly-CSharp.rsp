@@ -365,6 +365,7 @@
 "Assets/Scripts/Sound/MusicZone.cs"
 "Assets/Scripts/UI/Condition.cs"
 "Assets/Scripts/UI/UICondition.cs"
+"Assets/Scripts/UI/UIManager.cs"
 -langversion:9.0
 
 /deterministic

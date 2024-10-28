@@ -12,8 +12,9 @@ public class Interaction : MonoBehaviour
     public LayerMask layerMask;
     public GameObject currentInteractGameObject;
     private IInteractable currentInteractable;
+    public UIManager uIManager;
 
-    public TextMeshProUGUI promptText;
+
     private Camera camera;
 
     private void Start()
@@ -44,16 +45,21 @@ public class Interaction : MonoBehaviour
             {
                 currentInteractGameObject = null;
                 currentInteractable = null;
-                promptText.gameObject.SetActive(false);
+                UIManager.Instance.HidePromptText();
             }
         }
     }
 
     private void SetPromptText()
     {
-        promptText.gameObject.SetActive(true);
-        promptText.text = currentInteractable.GetInteractPrompt();
+        if (currentInteractable != null)
+        {
+            // UIManager를 통해 Prompt Text 설정
+            UIManager.Instance.SetPromptText(currentInteractable.GetInteractPrompt());
+        }
     }
+
+
 
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -62,7 +68,7 @@ public class Interaction : MonoBehaviour
             currentInteractable.OnInteract();
             currentInteractGameObject = null;
             currentInteractable = null;
-            promptText.gameObject.SetActive(false);
+            UIManager.Instance.HidePromptText();
         }
     }
 

@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("q누름");
             if (camera[0].gameObject.activeSelf)
             {
                 camera[0].gameObject.SetActive(false);
