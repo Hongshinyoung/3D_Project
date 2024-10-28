@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     public int jumpPower;
+
+    [Header("View")]
+    public Camera[] camera;
 
     private void Awake()
     {
@@ -107,6 +107,25 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started && isGrounded())
         {
             rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+        }
+    }
+
+    public void OnChangeView(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Debug.Log("q누름");
+            if (camera[0].gameObject.activeSelf)
+            {
+                camera[0].gameObject.SetActive(false);
+                camera[1].gameObject.SetActive(true);
+            }
+            else if (camera[1].gameObject.activeSelf)
+            {
+                camera[0].gameObject.SetActive(true);
+                camera[1].gameObject.SetActive(false);
+            }
+
         }
     }
 

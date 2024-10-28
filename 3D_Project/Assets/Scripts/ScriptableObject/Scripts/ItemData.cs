@@ -7,8 +7,13 @@ public enum ItmeType
     Resource
 }
 
+public class ItemDataConsumable
+{
+    public float value;
+}
 
-[CreateAssetMenu(fileName = "Item", menuName = "Items")]
+
+[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
     [Header("ItemInfo")]
@@ -18,9 +23,13 @@ public class ItemData : ScriptableObject
     public Sprite itemSprite;
     public GameObject dropPrefab;
 
+    [Header("Stacking")]
+    public bool canStack;
+    public int maxStackAmount;
+
     [Header("Equip")]
     public GameObject equipPrefab;
 
     [Header("Consumable")]
-    public GameObject consumablePrefab;
+    public ItemDataConsumable consumablePrefab;
 }
