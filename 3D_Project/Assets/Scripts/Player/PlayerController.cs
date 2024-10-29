@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -62,11 +63,19 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = dir;
     }
 
+    public IEnumerator Run(float amount)
+    {
+        float originalMoveSpeed = moveSpeed;
+        moveSpeed += amount;
+        yield return new WaitForSeconds(8);
+        moveSpeed = originalMoveSpeed;
+    }
+
     private void Look()
     {
         camCurrentXRot += mouseDelta.y * lookSensitively;
         camCurrentXRot = Mathf.Clamp(camCurrentXRot, minXLook, maxXLook);
-        transform.eulerAngles = transform.eulerAngles + new Vector3(-camCurrentXRot - transform.eulerAngles.x, mouseDelta.x * lookSensitively, 0);
+        transform.eulerAngles += new Vector3(-camCurrentXRot - transform.eulerAngles.x, mouseDelta.x * lookSensitively, 0);
     }
 
     private bool isGrounded()

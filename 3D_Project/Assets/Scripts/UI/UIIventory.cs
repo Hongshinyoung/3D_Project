@@ -183,7 +183,16 @@ public class UIIventory : MonoBehaviour
         {
             for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
-                condition.Heal(selectedItem.consumables[i].value);
+                switch (selectedItem.consumables[i].type)
+                {
+                    case ConsumableType.HP:
+                        condition.Heal(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.Speed:
+                        condition.SpeedMove(selectedItem.consumables[i].value);
+                        break;
+                }
+
             }
             RemoveSelectedItem();
         }

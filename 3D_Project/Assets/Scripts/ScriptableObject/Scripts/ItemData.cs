@@ -9,7 +9,8 @@ public enum ItmeType
 
 public enum ConsumableType
 {
-    HP
+    HP,
+    Speed
 }
 
 [System.Serializable]
