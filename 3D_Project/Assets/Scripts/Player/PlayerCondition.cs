@@ -21,6 +21,11 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         onTakeDamage?.Invoke();
     }
 
+    public void Heal(float amount)
+    {
+        health.Add(amount);
+    }
+
     private void Die()
     {
         Debug.Log("플레이어 사망");

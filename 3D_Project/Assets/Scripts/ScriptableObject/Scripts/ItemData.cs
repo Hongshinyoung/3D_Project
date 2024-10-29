@@ -7,8 +7,15 @@ public enum ItmeType
     Resource
 }
 
+public enum ConsumableType
+{
+    HP
+}
+
+[System.Serializable]
 public class ItemDataConsumable
 {
+    public ConsumableType type;
     public float value;
 }
 
@@ -23,13 +30,17 @@ public class ItemData : ScriptableObject
     public Sprite itemSprite;
     public GameObject dropPrefab;
 
+
     [Header("Stacking")]
     public bool canStack;
     public int maxStackAmount;
+
 
     [Header("Equip")]
     public GameObject equipPrefab;
 
     [Header("Consumable")]
-    public ItemDataConsumable consumablePrefab;
+    public ItemDataConsumable[] consumables;
+
+
 }

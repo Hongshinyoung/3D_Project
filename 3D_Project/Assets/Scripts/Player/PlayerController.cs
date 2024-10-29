@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float lookSensitively;
     private Vector2 mouseDelta;
     public Transform cameraContainer;
+    public bool canLook = true;
 
 
     [Header("Jump")]
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("View")]
     public Camera[] camera;
+    public Action onOpenInventory;
 
     private void Awake()
     {
@@ -45,7 +48,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Look();
+        if (canLook)
+        {
+            Look();
+        }
     }
     private void Move()
     {
@@ -60,8 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         camCurrentXRot += mouseDelta.y * lookSensitively;
         camCurrentXRot = Mathf.Clamp(camCurrentXRot, minXLook, maxXLook);
-        cameraContainer.localEulerAngles = new Vector3(-camCurrentXRot, 0, 0);
-        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitively, 0);
+        transform.eulerAngles = transform.eulerAngles + new Vector3(-camCurrentXRot - transform.eulerAngles.x, mouseDelta.x * lookSensitively, 0);
     }
 
     private bool isGrounded()
@@ -126,6 +131,22 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            onOpenInventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    private void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 
 }
